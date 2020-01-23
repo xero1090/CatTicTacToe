@@ -132,6 +132,17 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Check Mark.jpg" />
+    <Content Include="Assets\kitten sci.jpg" />
+    <Content Include="Assets\Laser cat.jpg" />
+    <Content Include="Assets\Nope Cat.gif" />
+    <Content Include="Assets\nuke cat.jpg" />
+    <Content Include="Assets\Omnom Cat.jpg" />
+    <Content Include="Assets\pigacorn.jpg" />
+    <Content Include="Assets\question mark.png" />
+    <Content Include="Assets\Rainbowcat.jpg" />
+    <Content Include="Assets\ready.gif" />
+    <Content Include="Assets\toiletwolf.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

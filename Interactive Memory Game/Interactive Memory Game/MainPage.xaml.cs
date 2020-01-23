@@ -26,5 +26,10 @@ namespace Interactive_Memory_Game
         {
             this.InitializeComponent();
         }
+
+        private void OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Game));
+        }
     }
 }
