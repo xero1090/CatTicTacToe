@@ -31,7 +31,9 @@
         </Viewbox>
         
         <Viewbox Grid.Row="1" Grid.Column="1">
-            <Image Source="Assets/ready.gif" />
+            <Button x:Name="readybtn" Click="ToEnd">
+                <Image Source="Assets/ready.gif" />
+            </Button>
         </Viewbox>
         
 

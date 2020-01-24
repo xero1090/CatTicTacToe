@@ -31,5 +31,10 @@ namespace Interactive_Memory_Game
         {
             this.Frame.Navigate(typeof(Game));
         }
+
+        private void ToEnd(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(GameOver));
+        }
     }
 }

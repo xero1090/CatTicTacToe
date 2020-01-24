@@ -26,5 +26,44 @@ namespace Interactive_Memory_Game
         {
             this.InitializeComponent();
         }
+
+
+        private void OnClick1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnClick2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnClick3(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnClick4(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnClick5(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void OnClick6(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void OnClick7(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnClick8(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -23,8 +23,8 @@
         </Grid.RowDefinitions>
         
         <TextBlock  FontSize="40" FontWeight="Bold" Width="Auto" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Thanks for Playing :3"/>
-        
-        
-        
+
+        <Image Grid.Row="1" Source="Assets/Rainbowcat.jpg"/>
+
     </Grid>
 </Page>
