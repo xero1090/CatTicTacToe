@@ -16,19 +16,54 @@
                 <GradientStop Color="#FF00DCFF" Offset="0.466"/>
             </LinearGradientBrush>
         </Grid.Background>
+       
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Kitten Memory Game" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" />
+        
+        <TextBlock Text="Kitten Memory Game" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" />
 
+        <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
+            <Image Source="Assets/Laser cat.jpg" Height="220" Width="220"/>
+        </Button>
+
+        <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
+            <Image Source="Assets/pigacorn.jpg" Height="220" Width="220"/>
+        </Button>
+
+        <Button Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
+            <Image Source="Assets/pigacorn.jpg" Height="220" Width="220"/>
+        </Button>
+    
+        <Button Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
+            <Image Source="Assets/nuke cat.jpg" Height="220" Width="220"/>
+        </Button>
+
+        <Button Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
+            <Image Source="Assets/Laser cat.jpg" Height="220" Width="220"/>
+        </Button>
+
+        <Button Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
+            <Image Source="Assets/nuke cat.jpg" Height="220" Width="220"/>
+        </Button>
+
+        <Button Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
+            <Image Source="Assets/Omnom cat.jpg" Height="220" Width="220"/>
+        </Button>
+
+        <Button Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
+            <Image Source="Assets/Omnom cat.jpg" Height="220" Width="220"/>
+        </Button>
+        
     </Grid>
 </Page>
