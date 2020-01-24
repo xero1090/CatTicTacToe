@@ -137,6 +137,7 @@
   <ItemGroup>
     <Content Include="Assets\Check Mark.jpg" />
     <Content Include="Assets\Dog of Wisdom Remix.mp3" />
+    <Content Include="Assets\FRainbowcat.jpg" />
     <Content Include="Assets\kitten sci.jpg" />
     <Content Include="Assets\Laser cat.jpg" />
     <Content Include="Assets\nuke cat.jpg" />
