@@ -19,12 +19,17 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         
         <TextBlock  FontSize="40" FontWeight="Bold" Width="Auto" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Thanks for Playing :3"/>
 
-        <Image Grid.Row="1" Source="Assets/Rainbowcat.jpg"/>
+        <TextBlock Grid.Row="1" FontSize="40" FontWeight="Bold" Text="All Hail Our Cat Overlords!" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <Image Grid.Row="2" Source="Assets/kitten sci.jpg"/>
+
+       
 
     </Grid>
 </Page>
