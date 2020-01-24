@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -29,41 +30,42 @@ namespace Interactive_Memory_Game
 
 
         private void OnClick1(object sender, RoutedEventArgs e)
-        {
 
+        {
+            _laser1.Source = new BitmapImage(new Uri("ms-appx:///Assets/Laser cat.jpg"));
         }
 
         private void OnClick2(object sender, RoutedEventArgs e)
         {
-
+            _pig1.Source = new BitmapImage(new Uri("ms-appx:///Assets/pigacorn.jpg"));
         }
 
         private void OnClick3(object sender, RoutedEventArgs e)
         {
-
+            _nuke1.Source = new BitmapImage(new Uri("ms-appx:///Assets/nuke cat.jpg"));
         }
 
         private void OnClick4(object sender, RoutedEventArgs e)
         {
-
+            _nom1.Source = new BitmapImage(new Uri("ms-appx:///Assets/Omnom cat.jpg"));
         }
 
         private void OnClick5(object sender, RoutedEventArgs e)
         {
-
+            _nuke2.Source = new BitmapImage(new Uri("ms-appx:///Assets/nuke cat.jpg"));
         }
         private void OnClick6(object sender, RoutedEventArgs e)
         {
-
+            _laser2.Source = new BitmapImage(new Uri("ms-appx:///Assets/Laser cat.jpg"));
         }
         private void OnClick7(object sender, RoutedEventArgs e)
         {
-
+            _nom2.Source = new BitmapImage(new Uri("ms-appx:///Assets/Omnom cat.jpg"));
         }
 
         private void OnClick8(object sender, RoutedEventArgs e)
         {
-
+            _pig2.Source = new BitmapImage(new Uri("ms-appx:///Assets/pigacorn.jpg"));
         }
     }
 }
