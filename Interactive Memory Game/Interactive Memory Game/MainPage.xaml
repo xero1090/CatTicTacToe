@@ -29,9 +29,20 @@
         <Viewbox Grid.Column="1">
             <TextBlock  FontSize="40" FontWeight="Bold" Width="Auto" Grid.ColumnSpan="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Kitten Memory Game"/>
         </Viewbox>
-         <Image Source="Assets/ready.gif" Grid.Row="1" Grid.Column="1"/>
-        <Image Source="Assets/kitten sci.jpg" HorizontalAlignment="Center"  Grid.Row="0" Grid.Column="0"/>
-        <Image Source="Assets/kitten sci.jpg" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2"/>
+        
+        <Viewbox Grid.Row="1" Grid.Column="1">
+            <Image Source="Assets/ready.gif" />
+        </Viewbox>
+        
+
+        <Viewbox Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,10,0">
+            <Image Source="Assets/kitten sci.jpg"/>
+        </Viewbox>
+
+        <Viewbox Margin="10,0,0,0" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left">
+            <Image Source="Assets/kitten sci.jpg"/>
+        </Viewbox>
+        
         <HyperlinkButton Grid.Column="1" Grid.Row="2" Content="Let's Play!" FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Width="376" Height="112" Click="OnClick" Background="#FFF7F7FA" Foreground="#FF090500"/>
     </Grid>
 
