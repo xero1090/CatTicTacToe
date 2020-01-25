@@ -28,7 +28,7 @@ namespace Interactive_Memory_Game
             this.InitializeComponent();
         }
 
-
+        
         private void OnClick1(object sender, RoutedEventArgs e)
 
         {
