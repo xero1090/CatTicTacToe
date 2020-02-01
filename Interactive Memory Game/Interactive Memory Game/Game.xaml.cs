@@ -22,13 +22,16 @@ namespace Interactive_Memory_Game
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
+
+    //In advance I apologize for the redundant code I could not figure out any other ways to make it work.
+    //I hope that in the very near future, I will be able to be able to write professional code. -Kevin Tran
     public sealed partial class Game : Page
     {
-        MessageDialog Match = new MessageDialog("You've got a match!");
+        MessageDialog Match = new MessageDialog("You have a match!");
 
-        MessageDialog Win = new MessageDialog("You've won!");
+        MessageDialog Win = new MessageDialog("You have completed the game. Congratulations!");
         
-        MessageDialog No_Match = new MessageDialog("Thats not a match.");
+        MessageDialog No_Match = new MessageDialog("Sorry, the tiles do not match. Please try again.");
 
         Image first_image;
 
@@ -37,6 +40,7 @@ namespace Interactive_Memory_Game
         Image clickedImage;
 
         bool clicked;
+
         int score;
         public Game()
         {

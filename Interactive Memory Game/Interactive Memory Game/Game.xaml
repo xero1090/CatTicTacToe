@@ -31,7 +31,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         
-        <TextBlock Text="Kitten Defusal Memory Game" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" />
+        <TextBlock Text="Kitten Defusal Memory Game" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" />
 
         <Button x:Name="_imgTile1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Click="OnClick1" >
             <Image x:Name="_laser1" Source="Assets/question mark.png" Height="220" Width="220" Tapped="OnTapped"/>
