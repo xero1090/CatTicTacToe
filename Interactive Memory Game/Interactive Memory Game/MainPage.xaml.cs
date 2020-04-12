@@ -26,11 +26,37 @@ namespace Interactive_Memory_Game
     {
         // Declare our Windows Media Player
         MediaPlayer player;
+        private const int IMAGE_TILE_COUNT = 8;
+        private Game _game;
+        private Image _imgTileCtrlList;
+        private Image _imgMatchCtrlList;
+        private Image _imgTile1;
+        private Image _imgTile2;
+        private Image _imgTile3;
+        private Image _imgTile4;
+        private Image _imgTile5;
+        private Image _imgTile6;
+        private Image _imgTile7;
+        private Image _imgTile8;
 
+        public MainPage(Image tileCtrlList, Image matchCtrlList)
+        {
+            _imgTileCtrlList = tileCtrlList;
+            _imgMatchCtrlList = matchCtrlList;
+        }
         public MainPage()
         {
             this.InitializeComponent();
             player = new MediaPlayer();
+            _game = new Game();
+            _imgTile1 = new Image();
+            _imgTile2 = new Image();
+            _imgTile3 = new Image();
+            _imgTile4 = new Image();
+            _imgTile5 = new Image();
+            _imgTile6 = new Image();
+            _imgTile7 = new Image();
+            _imgTile8 = new Image();
         }
 
         private async void OnClick(object sender, RoutedEventArgs e)

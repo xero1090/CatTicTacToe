@@ -42,6 +42,16 @@ namespace Interactive_Memory_Game
         bool clicked;
 
         int score;
+
+        private static Random s_randomizer;
+
+        private byte _attemptCount;
+
+        private byte _matchCount;
+
+        private Tile _tileList;
+        private TileMatch _matchList;
+        private TileMatch _crtMatch;
         public Game()
         {
             this.InitializeComponent();
@@ -50,8 +60,37 @@ namespace Interactive_Memory_Game
             clickedImage = null;
             score = 0;
             clicked = false;
-           
+            _tileList = null;
+            _matchList = new TileMatch();
+            _crtMatch = new TileMatch();
         }
+
+        public Game(byte tileCount) { }
+        private void LoadImageAssets(byte tileCount) { }
+        private void CreateTiles(byte tileCount) { }
+        private void RandomizeTiles() { }
+        public Tuple<bool, TileMatch> CheckMatch(byte tileNo) {return }
+
+        #region Struct
+        public struct TileMatch
+        {
+            private Tile _firstTile;
+            private Tile _secondTile;
+            public Tile FirstTile { get; set; }
+            public Tile SecondTile { get; set; }
+            public bool IsComplete { get;}
+            public bool IsCorrect { get; }
+
+            public TileMatch(Tile firstTile)
+            {
+                _firstTile = firstTile;   
+            }
+            public TileMatch(Tile secondTile)
+            {
+                _secondTile = secondTile;
+            }
+        }
+        #endregion
 
         private async void Pairs_Match()
        {
@@ -79,6 +118,7 @@ namespace Interactive_Memory_Game
             if (score == 8)
             {//show the Win Pop-up
                 await Win.ShowAsync();
+                this.Frame.Navigate(typeof(GameOver));
             }
         }
 
