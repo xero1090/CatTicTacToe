@@ -33,35 +33,35 @@
         
         <TextBlock Text="Kitten Defusal Memory Game" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" />
 
-        <Button x:Name="_imgTile1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Click="OnClick1" >
+        <Button x:Name="_imgTile1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Click="OnButtonClick" Tag="1">
             <Image x:Name="_laser1" Source="Assets/question mark.png" Height="220" Width="220" Tapped="OnTapped"/>
         </Button>
 
-        <Button x:Name="_imgTile2" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Click="OnClick2" >
+        <Button x:Name="_imgTile2" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Click="OnButtonClick" Tag="2">
             <Image x:Name="_pig1"  Source="Assets/question mark.png" Height="220" Width="220" Tapped="OnTapped"/>
         </Button>
 
-        <Button x:Name="_imgTile8" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Click="OnClick8" >
+        <Button x:Name="_imgTile8" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Click="OnButtonClick" Tag="8">
             <Image x:Name="_pig2"  Source="Assets/question mark.png" Height="220" Width="220" Tapped="OnTapped"/>
         </Button>
 
-        <Button  x:Name="_imgTile3" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Click="OnClick3">
+        <Button  x:Name="_imgTile3" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Click="OnButtonClick" Tag="3">
             <Image x:Name="_nuke1"  Source="Assets/question mark.png" Height="220" Width="220" Tapped="OnTapped"/>
         </Button>
 
-        <Button x:Name="_imgTile6" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Click="OnClick6">
+        <Button x:Name="_imgTile6" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Click="OnButtonClick" Tag="6">
             <Image x:Name="_laser2" Source="Assets/question mark.png" Height="220" Width="220" Tapped="OnTapped"/>
         </Button>
 
-        <Button x:Name="_imgTile5" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Click="OnClick5">
+        <Button x:Name="_imgTile5" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Click="OnButtonClick" Tag="5">
             <Image x:Name="_nuke2" Source="Assets/question mark.png" Height="220" Width="220" Tapped="OnTapped"/>
         </Button>
 
-        <Button x:Name="_imgTile7" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Click="OnClick7" >
+        <Button x:Name="_imgTile7" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Click="OnButtonClick" Tag="7">
             <Image x:Name="_nom2" Source="Assets/question mark.png" Height="220" Width="220" Tapped="OnTapped"/>
         </Button>
 
-        <Button x:Name="_imgTile4" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Click="OnClick4">
+        <Button x:Name="_imgTile4" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Click="OnButtonClick" Tag="4">
             <Image x:Name="_nom1"  Source="Assets/question mark.png" Height="220" Width="220" Tapped="OnTapped"/>
         </Button>
         

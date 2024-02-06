@@ -15,13 +15,9 @@ using Windows.UI.Xaml.Navigation;
 using Windows.Media.Playback;
 using Windows.Media.Core;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace Interactive_Memory_Game
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+    
     public sealed partial class MainPage : Page
     {
         // Declare our Windows Media Player
@@ -42,7 +38,7 @@ namespace Interactive_Memory_Game
 
             // Searches for specific file
             Windows.Storage.StorageFile file = await folder.GetFileAsync("Dog of Wisdom Remix.mp3");
-
+            player.Volume = 0.5;
             player.Source = MediaSource.CreateFromStorageFile(file);
             player.Play();
         }

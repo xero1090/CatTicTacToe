@@ -15,401 +15,127 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+
 
 namespace Interactive_Memory_Game
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
 
-    //In advance I apologize for the redundant code I could not figure out any other ways to make it work.
-    //I hope that in the very near future, I will be able to be able to write professional code. -Kevin Tran
     public sealed partial class Game : Page
     {
-        MessageDialog Match = new MessageDialog("You have a match!");
+        private Image[] images; // Array to store Image controls
+        private int[] imageMatches; // Array to store matching information
+        private int firstClickedIndex = -1; // Index of the first clicked image
 
-        MessageDialog Win = new MessageDialog("You have completed the game. Congratulations!");
-        
-        MessageDialog No_Match = new MessageDialog("Sorry, the tiles do not match. Please try again.");
-
-        Image first_image;
-
-        Image second_image;
-
-        Image clickedImage;
-
-        bool clicked;
-
-        int score;
         public Game()
         {
             this.InitializeComponent();
-            first_image = null;
-            second_image = null;
-            clickedImage = null;
-            score = 0;
-            clicked = false;
-           
+            InitializeArrays();
         }
 
-        private async void Pairs_Match()
-       {
-            //if both images are the same then display the Match Pop-up
-           if (first_image.Source == second_image.Source)
-           { 
-                //show the Match Pop-up
-               await Match.ShowAsync();
-           }
-      }
-
-        private async void Pairs_DontMatch()
-        { 
-            //if both images aren't the same then display the No_Match Pop-up
-            if (first_image.Source != second_image.Source)
-            {
-                //show the No_Match Pop-up
-                await No_Match.ShowAsync();
-            }
-        }
-
-        private async void Congrats()
+        private void InitializeArrays()
         {
-            //if all Images have been clicked then display the Win Pop-up (counter only increases for each unclicked image)
-            if (score == 8)
-            {//show the Win Pop-up
-                await Win.ShowAsync();
+            // Initialize the arrays with Image controls and matching information
+            images = new Image[] { _laser1, _pig1, _nuke1, _nom1, _nuke2, _laser2, _nom2, _pig2 };
+            imageMatches = new int[images.Length];
+
+            // Initialize matching information (for demonstration purposes)
+            for (int i = 0; i < imageMatches.Length; i++)
+            {
+                imageMatches[i] = i % (imageMatches.Length / 2);
             }
+
+            ShuffleArray(imageMatches); // Shuffle the matching information
         }
 
-        private bool IsClicked()
+        private void OnButtonClick(object sender, RoutedEventArgs e)
         {
-            //if the image is clicked it cannot be clicked anymore
-            if (clicked)
+            Button clickedButton = sender as Button;
+
+            if (clickedButton != null)
             {
-                return clicked = true;
-            }
-            //However if the image has not been clicked then it will add a point when clicked
-            else
-            {
-                return clicked = false;
+                int buttonIndex = Convert.ToInt32(clickedButton.Tag) - 1; // Tags are 1-based
+
+                // Reveal the image
+                Image image = images[buttonIndex];
+                image.Source = new BitmapImage(new Uri($"ms-appx:///Assets/{imageMatches[buttonIndex]}.jpg"));
+
+                if (firstClickedIndex == -1)
+                {
+                    // First button clicked
+                    firstClickedIndex = buttonIndex;
+                }
+                else
+                {
+                    // Second button clicked
+                    if (imageMatches[firstClickedIndex] == imageMatches[buttonIndex])
+                    {
+                        // Match
+                        ShowMatchPopup();
+                    }
+                    else
+                    {
+                        // No match
+                        ShowNoMatchPopup();
+                        // Optionally, reset the images here
+                        ResetImages();
+                    }
+
+                    firstClickedIndex = -1; // Reset for the next pair
+                }
             }
         }
-        private void OnClick1(object sender, RoutedEventArgs e)
 
-        {
-            //whenever this button is clicked change the image to the desired image
-            _laser1.Source = new BitmapImage(new Uri("ms-appx:///Assets/Laser cat.jpg"));
-            clickedImage = sender as Image;
-            IsClicked();
-            if (IsClicked() == false)
-            {
-                //if this is the first time this image is clicked then add a point
-                score++;
-                //if the first image is empty (image is essentially a choice) then the image 
-                //that was just clicked will become the first image
-                if (first_image == null)
-                {
-                    first_image = clickedImage;
-
-                }
-                //if the second image is empty (image is essentially a choice) then the image 
-                //that was just clicked will become the second image
-                if (second_image == null)
-                {
-                second_image = clickedImage;
-                }
-                //if both image choices are not empty then compare and see if they match or dont match 
-                if (first_image !=null && second_image != null)
-                {
-                Pairs_Match();
-                Pairs_DontMatch();
-                }
-
-            }
-            //if the points or the score (same thing) are 8 then the user (in theory) 
-            //has matched all the images and the Win Pop-up appears
-            Congrats();
-        }
-
-        private void OnClick2(object sender, RoutedEventArgs e)
-        {
-            //whenever this button is clicked change the image to the desired image
-            _pig1.Source = new BitmapImage(new Uri("ms-appx:///Assets/pigacorn.jpg"));
-            clickedImage = sender as Image;
-            IsClicked();
-            if (IsClicked() == false)
-            {
-                //if this is the first time this image is clicked then add a point
-                score++;
-                //if the first image is empty (image is essentially a choice) then the image
-                //that was just clicked will become the first image
-                if (first_image == null)
-                {
-                    first_image = clickedImage;
-
-                }
-                //if the second image is empty (image is essentially a choice) then the image 
-                //that was just clicked will become the second image
-                if (second_image == null)
-                {
-                    second_image = clickedImage;
-                }
-                //if both image choices are not empty then compare and see if they match or dont match 
-                if (first_image != null && second_image != null)
-                {
-                    Pairs_Match();
-                    Pairs_DontMatch();
-                }
-            }
-
-            //if the points or the score (same thing) are 8 then the user (in theory) 
-            //has matched all the images and the Win Pop-up appears
-            Congrats();
-        }
-
-        private void OnClick3(object sender, RoutedEventArgs e)
-        {
-            //whenever this button is clicked change the image to the desired image
-            _nuke1.Source = new BitmapImage(new Uri("ms-appx:///Assets/nuke cat.jpg"));
-            clickedImage = sender as Image;
-            IsClicked();
-            if (IsClicked() == false)
-            {
-                //if this is the first time this image is clicked then add a point
-                score++;
-                //if the first image is empty (image is essentially a choice) then the image 
-                //that was just clicked will become the first image
-                if (first_image == null)
-                {
-                    first_image = clickedImage;
-
-                }
-                //if the second image is empty (image is essentially a choice) then the image 
-                //that was just clicked will become the second image
-                if (second_image == null)
-                {
-                    second_image = clickedImage;
-                }
-                //if both image choices are not empty then compare and see if they match or dont match 
-                if (first_image != null && second_image != null)
-                {
-                    Pairs_Match();
-                    Pairs_DontMatch();
-                }
-            }
-            //if the points or the score (same thing) are 8 then the user (in theory) 
-            //has matched all the images and the Win Pop-up appears
-            Congrats();
-
-        }
-
-        private void OnClick4(object sender, RoutedEventArgs e)
-        {
-            //whenever this button is clicked change the image to the desired image
-            _nom1.Source = new BitmapImage(new Uri("ms-appx:///Assets/Omnom Cat.jpg"));
-            clickedImage = sender as Image;
-
-            IsClicked();
-            if (IsClicked() == false)
-            {
-                //if this is the first time this image is clicked then add a point
-                score++;
-                //if the first image is empty (image is essentially a choice) then the image 
-                //that was just clicked will become the first image
-                if (first_image == null)
-                {
-                    first_image = clickedImage;
-
-                }
-                //if the second image is empty (image is essentially a choice) then the image 
-                //that was just clicked will become the second image
-                if (second_image == null)
-                {
-                    second_image = clickedImage;
-                }
-                //if both image choices are not empty then compare and see if they match or dont match 
-                if (first_image != null && second_image != null)
-                {
-                    Pairs_Match();
-                    Pairs_DontMatch();
-                }
-            }
-
-            //if the points or the score (same thing) are 8 then the user (in theory) 
-            //has matched all the images and the Win Pop-up appears
-            Congrats();
-        }
-
-        private void OnClick5(object sender, RoutedEventArgs e)
-        {
-            //whenever this button is clicked change the image to the desired image
-            _nuke2.Source = new BitmapImage(new Uri("ms-appx:///Assets/nuke cat.jpg"));
-            clickedImage = sender as Image;
-            IsClicked();
-            if (IsClicked() == false)
-            {
-                //if this is the first time this image is clicked then add a point
-                score++;
-                //if the first image is empty (image is essentially a choice) then the image 
-                //that was just clicked will become the first image
-                if (first_image == null)
-                {
-                    first_image = clickedImage;
-
-                }
-                //if the second image is empty (image is essentially a choice) then the image 
-                //that was just clicked will become the second image
-                if (second_image == null)
-                {
-                    second_image = clickedImage;
-                }
-                //if both image choices are not empty then compare and see if they match or dont match 
-                if (first_image != null && second_image != null)
-                {
-                    Pairs_Match();
-                    Pairs_DontMatch();
-                }
-            }
-            //if the points or the score (same thing) are 8 then the user (in theory) 
-            //has matched all the images and the Win Pop-up appears
-            Congrats();
-        }
-        private void OnClick6(object sender, RoutedEventArgs e)
-        {
-            //whenever this button is clicked change the image to the desired image
-            _laser2.Source = new BitmapImage(new Uri("ms-appx:///Assets/Laser cat.jpg"));
-            clickedImage = sender as Image;
-
-            IsClicked();
-            if (IsClicked() == false)
-            {
-                //if this is the first time this image is clicked then add a point
-                score++;
-                //if the first image is empty (image is essentially a choice) then the image 
-                //that was just clicked will become the first image
-                if (first_image == null)
-                {
-                    first_image = clickedImage;
-
-                }
-                //if the second image is empty (image is essentially a choice) then the image 
-                //that was just clicked will become the second image
-                if (second_image == null)
-                {
-                    second_image = clickedImage;
-                }
-                //if both image choices are not empty then compare and see if they match or dont match 
-                if (first_image != null && second_image != null)
-                {
-                    Pairs_Match();
-                    Pairs_DontMatch();
-                }
-            }
-            //if the points or the score (same thing) are 8 then the user (in theory) 
-            //has matched all the images and the Win Pop-up appears
-            Congrats();
-
-        }
-
-        private void OnClick7(object sender, RoutedEventArgs e)
-        {
-            //whenever this button is clicked change the image to the desired image
-            _nom2.Source = new BitmapImage(new Uri("ms-appx:///Assets/Omnom Cat.jpg"));
-            clickedImage = sender as Image;
-            IsClicked();
-            if (IsClicked() == false)
-            {
-                //if this is the first time this image is clicked then add a point
-                score++;
-                //if the first image is empty (image is essentially a choice) then the image 
-                //that was just clicked will become the first image
-                if (first_image == null)
-                {
-                    first_image = clickedImage;
-
-                }
-                //if the second image is empty (image is essentially a choice) then the image
-                //that was just clicked will become the second image
-                if (second_image == null)
-                {
-                    second_image = clickedImage;
-                }
-                //if both image choices are not empty then compare and see if they match or dont match 
-                if (first_image != null && second_image != null)
-                {
-                    Pairs_Match();
-                    Pairs_DontMatch();
-                }
-            }
-            //if the points or the score (same thing) are 8 then the user (in theory) 
-            //has matched all the images and the Win Pop-up appears
-            Congrats();
-        }
-
-        private void OnClick8(object sender, RoutedEventArgs e)
-        {
-            //whenever this button is clicked change the image to the desired image
-            _pig2.Source = new BitmapImage(new Uri("ms-appx:///Assets/pigacorn.jpg"));
-            clickedImage = sender as Image;
-            IsClicked();
-            if (IsClicked() == false)
-            {
-                //if this is the first time this image is clicked then add a point
-                score++;
-                //if the first image is empty (image is essentially a choice) then the image 
-                //that was just clicked will become the first image
-                if (first_image == null)
-                {
-                    first_image = clickedImage;
-
-                }
-                //if the second image is empty (image is essentially a choice) then the image 
-                //that was just clicked will become the second image
-                if (second_image == null)
-                {
-                    second_image = clickedImage;
-                }
-                //if both image choices are not empty then compare and see if they match or dont match 
-                if (first_image != null && second_image != null)
-                {
-                    Pairs_Match();
-                    Pairs_DontMatch();
-                }
-            }
-            //if the points or the score (same thing) are 8 then the user (in theory)
-            //has matched all the images and the Win Pop-up appears
-            Congrats();
-        }
-
-        //Just ignore this section I have no idea why but when I removed this I had an error and despite removing the elements in Game.g.cs
-        //It still interfered with my Matching logic
         private void OnTapped(object sender, TappedRoutedEventArgs e)
         {
-           
-                clickedImage = sender as Image;
-                // If Image is null assign it to a new image when clicked
-                if (clickedImage == null)
-                { }
+            Image tappedImage = sender as Image;
 
-                if (first_image == null)
-                {
-                    first_image = clickedImage;
+            if (tappedImage != null)
+            {
+                // Handle tapping if needed
+            }
+        }
 
-                }
-            // If Second Image is null assign it to a new image when clicked
-            if (second_image == null)
-                {
-                    second_image = clickedImage;
+        private void ShowMatchPopup()
+        {
+            // Show the match popup
+            MessageDialog matchDialog = new MessageDialog("You have a match!");
+            _ = matchDialog.ShowAsync();
 
-                }
-            
-        } 
-        
+            // Optionally,
+            // Update score or any other game logic as needed
+        }
+
+        private void ShowNoMatchPopup()
+        {
+            // Show the no match popup
+            MessageDialog noMatchDialog = new MessageDialog("Sorry, the tiles do not match. Please try again.");
+            _ = noMatchDialog.ShowAsync();
+
+            // Optionally, reset the images here
+            ResetImages();
+        }
+
+        private void ResetImages()
+        {
+            // Reset all images to question mark
+            foreach (Image image in images)
+            {
+                image.Source = new BitmapImage(new Uri("ms-appx:///Assets/question mark.png"));
+            }
+        }
+
+        // Fisher-Yates shuffle algorithm for shuffling an array
+        private void ShuffleArray<T>(T[] array)
+        {
+            Random random = new Random();
+            for (int i = array.Length - 1; i > 0; i--)
+            {
+                int j = random.Next(0, i + 1);
+                T temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+
     }
-    
-
-   
-        
-    }
-
+}
