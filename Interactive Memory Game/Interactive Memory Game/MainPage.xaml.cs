@@ -38,7 +38,7 @@ namespace Interactive_Memory_Game
 
             // Searches for specific file
             Windows.Storage.StorageFile file = await folder.GetFileAsync("Dog of Wisdom Remix.mp3");
-            player.Volume = 0.5;
+            player.Volume = 0.25;
             player.Source = MediaSource.CreateFromStorageFile(file);
             player.Play();
         }
