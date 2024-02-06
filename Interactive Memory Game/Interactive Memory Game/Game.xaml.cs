@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
@@ -19,12 +20,12 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Interactive_Memory_Game
 {
-
     public sealed partial class Game : Page
     {
-        private Image[] images; // Array to store Image controls
+        private MatchedImage[] images; // Array to store MatchedImage controls
         private int[] imageMatches; // Array to store matching information
         private int firstClickedIndex = -1; // Index of the first clicked image
+        private int matchedCount = 0; // Keep track of the number of matched images
 
         public Game()
         {
@@ -34,8 +35,8 @@ namespace Interactive_Memory_Game
 
         private void InitializeArrays()
         {
-            // Initialize the arrays with Image controls and matching information
-            images = new Image[] { _laser1, _pig1, _nuke1, _nom1, _nuke2, _laser2, _nom2, _pig2 };
+            // Initialize the arrays with MatchedImage controls and matching information
+            images = new MatchedImage[] { new MatchedImage { ImageControl = _laser1 }, new MatchedImage { ImageControl = _pig1 }, new MatchedImage { ImageControl = _nuke1 }, new MatchedImage { ImageControl = _nom1 }, new MatchedImage { ImageControl = _nuke2 }, new MatchedImage { ImageControl = _laser2 }, new MatchedImage { ImageControl = _nom2 }, new MatchedImage { ImageControl = _pig2 } };
             imageMatches = new int[images.Length];
 
             // Initialize matching information (for demonstration purposes)
@@ -43,48 +44,9 @@ namespace Interactive_Memory_Game
             {
                 imageMatches[i] = i % (imageMatches.Length / 2);
             }
-
-            ShuffleArray(imageMatches); // Shuffle the matching information
+            // Shuffle the matching information
+            ShuffleArray(imageMatches); 
         }
-
-        private void OnButtonClick(object sender, RoutedEventArgs e)
-        {
-            Button clickedButton = sender as Button;
-
-            if (clickedButton != null)
-            {
-                int buttonIndex = Convert.ToInt32(clickedButton.Tag) - 1; // Tags are 1-based
-
-                // Reveal the image
-                Image image = images[buttonIndex];
-                image.Source = new BitmapImage(new Uri($"ms-appx:///Assets/{imageMatches[buttonIndex]}.jpg"));
-
-                if (firstClickedIndex == -1)
-                {
-                    // First button clicked
-                    firstClickedIndex = buttonIndex;
-                }
-                else
-                {
-                    // Second button clicked
-                    if (imageMatches[firstClickedIndex] == imageMatches[buttonIndex])
-                    {
-                        // Match
-                        ShowMatchPopup();
-                    }
-                    else
-                    {
-                        // No match
-                        ShowNoMatchPopup();
-                        // Optionally, reset the images here
-                        ResetImages();
-                    }
-
-                    firstClickedIndex = -1; // Reset for the next pair
-                }
-            }
-        }
-
         private void OnTapped(object sender, TappedRoutedEventArgs e)
         {
             Image tappedImage = sender as Image;
@@ -94,6 +56,59 @@ namespace Interactive_Memory_Game
                 // Handle tapping if needed
             }
         }
+        private async void OnButtonClick(object sender, RoutedEventArgs e)
+        {
+            Button clickedButton = sender as Button;
+
+            if (clickedButton != null)
+            {
+                int buttonIndex = Convert.ToInt32(clickedButton.Tag) - 1; // Tags are 1-based
+
+                // Reveal the image
+                MatchedImage matchedImage = images[buttonIndex];
+                matchedImage.ImageControl.Source = new BitmapImage(new Uri($"ms-appx:///Assets/{imageMatches[buttonIndex]}.jpg"));
+
+                
+
+                if (firstClickedIndex == -1)
+                {
+                    // First button clicked
+                    firstClickedIndex = buttonIndex;
+                }
+                else
+                {
+                    // Second button clicked
+                    await Task.Delay(250);
+                    if (imageMatches[firstClickedIndex] == imageMatches[buttonIndex])
+                    {
+                        // Match
+                        ShowMatchPopup();
+                        matchedCount++;
+
+                        // Mark the images as matched
+                        images[firstClickedIndex].IsMatched = true;
+                        images[buttonIndex].IsMatched = true;
+
+                        // Check if all images are matched after this match
+                        if (matchedCount == images.Length / 2)
+                        {
+                            // Navigate to GameOver page
+                            this.Frame.Navigate(typeof(GameOver));
+                            return; // Exit the method to prevent further processing
+                        }
+                    }
+                    else
+                    {
+                        // No match
+                        ShowNoMatchPopup();
+                        // Optionally, reset the images here
+                        ResetImages();
+                    }
+                    // Reset for the next pair
+                    firstClickedIndex = -1; 
+                }
+            }
+        }
 
         private void ShowMatchPopup()
         {
@@ -101,8 +116,6 @@ namespace Interactive_Memory_Game
             MessageDialog matchDialog = new MessageDialog("You have a match!");
             _ = matchDialog.ShowAsync();
 
-            // Optionally,
-            // Update score or any other game logic as needed
         }
 
         private void ShowNoMatchPopup()
@@ -117,10 +130,13 @@ namespace Interactive_Memory_Game
 
         private void ResetImages()
         {
-            // Reset all images to question mark
-            foreach (Image image in images)
+            // Reset only the images that have not been matched
+            for (int i = 0; i < images.Length; i++)
             {
-                image.Source = new BitmapImage(new Uri("ms-appx:///Assets/question mark.png"));
+                if (!images[i].IsMatched)
+                {
+                    images[i].ImageControl.Source = new BitmapImage(new Uri("ms-appx:///Assets/question mark.png"));
+                }
             }
         }
 
@@ -136,6 +152,8 @@ namespace Interactive_Memory_Game
                 array[j] = temp;
             }
         }
-
     }
 }
+
+
+
